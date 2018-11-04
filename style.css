@@ -1,0 +1,263 @@
+body {
+	background-color: black;
+	color: white;
+	font-family: "Arial Black", Gadget, sans-serif;
+}
+
+ #wordCountDisplay {
+   position: absolute;
+   left: 35%;
+   top: 40%;
+   border: 1px solid lime;
+   padding: 10px;
+   margin: 5px;
+ }
+
+.content form {
+	line-spacing: 1.6;
+}
+
+a {
+	color: lime;
+}
+
+a:hover {
+	color: white;
+}
+
+#symbol {
+	width: 10%;
+}
+
+.errorMessage {
+	color:red;
+}
+
+textarea {
+	resize: none;
+}
+
+#createQuestion {
+	width: 50%;
+}
+
+.createOptions {
+	width: 25%;
+}
+
+
+/* LOGGED IN HEADER */
+.logged img, .logged h1 {
+	float: left;
+	font-size: 2.5em;
+	margin-left: 50px;
+}
+
+.logged {
+	float: left;
+	width: 50%;
+	height: 100px;
+	margin-bottom: 30px;
+}
+
+.logged #info {
+	float: right;
+	position: relative;
+	top: 70px;
+	left: 700px;
+}
+
+/*  END OF LOGGED IN HEADER STYLING*/
+
+
+/* HEADERS WITH LOG IN OPTION */
+.login img, .login h1 {
+	float: left;
+	font-size: 2.5em;
+	margin-left: 50px;
+}
+
+.login {
+	float: left;
+	width: 50%;
+	height: 100px;
+	margin-bottom: 30px;
+}
+
+.login form {
+	float: right;
+	position: relative;
+	top: 70px;
+	right: 20px;
+}
+
+header:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+/* HEADER WITH LOGIN STYLE ENDING*/
+
+
+/* NORMAL HEADERS */
+.title img, .title h1 {
+	float: left;
+	font-size: 2.5em;
+	margin-left: 50px;
+}
+
+.title {
+	float: left;
+	width: 50%;
+	height: 100px;
+	margin-bottom: 30px;
+}
+
+.normal:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+/* END OF NORMAL HEADER STYLING */
+
+
+
+/* CONTENT STYLE */
+
+.content {
+	float: left;
+	width: 45%;
+	height: 400px;
+	margin-left: 2.5%;
+	margin-right: 2.5%;
+}
+
+section:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+/* END OF CONTENT STYLE*/
+
+
+/* SPECIFIC CONTENT STYLING */
+.avatar {
+	position: relative;
+	left: 80%;
+	bottom: 35%;
+	width: 40%;
+	height: 150px;
+}
+
+#avatar {
+	width: 30%;
+	padding-left: 25px;
+}
+
+#create {
+	position: relative;
+	margin-left: 20%;
+	bottom: 35%;
+}
+
+#login {
+	padding-left: 100px;
+	color: lime;
+}
+#login:hover {
+	color: white;
+}
+
+#signup {
+	padding-left: 95px;
+	color: lime;
+}
+
+#signup:hover {
+	color: white;
+}
+
+#special {
+	padding-left: 115px;
+	color: lime;
+}
+
+#special:hover {
+	color: white;
+}
+
+#image {
+	width: 3%;
+	margin-right: 5px;
+}
+
+#solo {
+	margin-left: 50px;
+}
+
+#button {
+	margin-left: 50px;
+	font-size: 2.5em;
+}
+
+#block {
+	border-bottom: 3px solid lime;
+}
+
+/* END OF SPECIFIC CONTENT STYLING */
+
+
+/* TEMPORARY STATISTIC DIAGRAM */
+.diagram {
+	float: left;
+	width: 45%;
+	height: 400px;
+	margin-left: 2.5%;
+	margin-right: 2.5%;
+}
+
+#diagram {
+	border-left: 100px solid lime;
+	position: relative;
+	left: 10%;
+	bottom: 25%;
+	height: 20px;
+	z-index: -1;
+}
+
+#diagram2 {
+	border-left: 60px solid lime;
+	position: relative;
+	left: 10%;
+	bottom: 26%;
+	height: 20px;
+	z-index: -1;
+}
+
+#diagram3 {
+	border-left: 40px solid lime;
+	position: relative;
+	left: 10%;
+	bottom: 27%;
+	height: 20px;
+	z-index: -1;
+}
+
+#visual1 {
+	position: relative;
+	right: 100px;
+}
+
+#visual2 {
+	position: relative;
+	right: 60px;
+}
+
+#visual3 {
+	position: relative;
+	right: 40px;
+}
+
+/* END OF TEMPORARY STATISTIC DIAGRAM STYLING*/
