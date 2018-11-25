@@ -2,8 +2,8 @@
 
 <html>
 	<head>
+		<meta charset="utf-8"> </meta>
 		<link rel="stylesheet" href="style.css" type="text/css">
-		<script type="text/javascript" src="validate.js"></script>
 		<script type="text/javascript" src="characterCounter.js"></script>
 	</head>
 	
@@ -36,17 +36,19 @@
 				</p> 
 				
 				<textarea id="createQuestion" name="question" placeholder="Write a question here..."></textarea><br>
-				<textarea class="createOptions" name="option1" placeholder="Option 1"></textarea><br>
-				<textarea class="createOptions" name="option2" placeholder="Option 2"></textarea><br>
-				<textarea class="createOptions" name="option3" placeholder="Option 3"></textarea><br>
-				<textarea class="createOptions" name="option4" placeholder="Option 4"></textarea><br>
-				<textarea class="createOptions" name="option5" placeholder="Option 5"></textarea><br>	
+				<textarea id="createOption1" name="option1" placeholder="Option 1"></textarea><br>
+				<textarea id="createOption2" name="option2" placeholder="Option 2"></textarea><br>
+				<textarea id="createOption3" name="option3" placeholder="Option 3"></textarea><br>
+				<textarea id="createOption4" name="option4" placeholder="Option 4"></textarea><br>
+				<textarea id="createOption5" name="option5" placeholder="Option 5"></textarea><br>	
 								
 				Open Poll at: <input type="date" name="pollOpenDate"> <input type="time" name="pollOpenTime"> &nbsp; 
 				Close Poll at: <input type="date" name="pollCloseDate"> <input type="time" name="pollCloseTime"><br>
 				
 				<input id="createPoll" type="submit" value="Create Poll"><br>
 			</form>
+			
+			<script type="text/javascript" src="pollcreation-r.js"></script>
 			
 			
 		</section>
