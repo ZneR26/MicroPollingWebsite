@@ -53,29 +53,33 @@ function signupValidation(event){
 	document.getElementById("confirmPasswordMessage").innerHTML ="";
 	document.getElementById("birthdayMessage").innerHTML ="";
 		
-	if ( (screenName==null) || (screenName=="") || (!screenNamePattern.test(screenName)) ) {  
+	if ( (screenName==null) || (screenName=="") || (!screenNamePattern.test(screenName)) ) 
+	{  
 	    document.getElementById("screenNameMessage").innerHTML="Please enter the correct username format (No spaces or other non-word characters)<br>";
 	    result = false;
     }
 	
-	if ( (email==null) || (email=="") || (!emailPattern.test(email)) ) {	
+	if ( (email==null) || (email=="") || (!emailPattern.test(email)) ) 
+	{	
 		document.getElementById("emailMessage").innerHTML="Please enter the correct username format (username@somewhere.sth)<br>";
 		result = false;
 	}
 
-	if ( (password.length < minPasswordLength) || (!passwordPattern.test(password)) ) {
+	if ( (password.length < minPasswordLength) || (!passwordPattern.test(password)) ) 
+	{
 		document.getElementById("passwordMessage").innerHTML="Please enter the password correcty (8 characters long, at lease one non-letter)<br>";
 		result = false;
 	}
 
-	if (confirmPassword != password) {
+	if (confirmPassword != password) 
+	{
 		document.getElementById("confirmPasswordMessage").innerHTML= "The confirmed password should be the same as the password given above<br>";
 		result = false;
 	}
 	
-	if(!birthdayPattern.test(birthday))
+	if (!birthdayPattern.test(birthday))
 	{
-		document.getElementById("birthdayMessage").innerHTML ="Invalid date. <br>";
+		document.getElementById("birthdayMessage").innerHTML="Invalid date <br>";
 		result = false;
 	}
 			
