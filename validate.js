@@ -38,7 +38,7 @@ function signupValidation(event){
 	var email = document.forms.signupForm.email.value;
 	var password = document.forms.signupForm.password.value;
 	var confirmPassword = document.forms.signupForm.confirmPassword.value;
-	var birthday = document.form.signupForm.birthday.value;
+	var birthday = document.forms.signupForm.birthday.value;
 	
 	const minPasswordLength = 8;
 	
@@ -75,7 +75,7 @@ function signupValidation(event){
 	
 	if(!birthdayPattern.test(birthday))
 	{
-		document.getElementById("birthdayMessage").innerHTML ="Invalid date.";
+		document.getElementById("birthdayMessage").innerHTML ="Invalid date. <br>";
 		result = false;
 	}
 			
