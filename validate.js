@@ -13,6 +13,7 @@ function loginValidation(event){
 	
 	document.getElementById("emailMessageLogin").innerHTML ="";
     document.getElementById("passwordMessageLogin").innerHTML ="";
+
     
     if ( (emailInput == "") || (emailInput == null) || (!emailPattern.test(emailInput)) ){
     	document.getElementById("emailMessageLogin").innerHTML="Email is empty or invalid (example: rivero2r@uregina.ca)<br>";
@@ -37,17 +38,20 @@ function signupValidation(event){
 	var email = document.forms.signupForm.email.value;
 	var password = document.forms.signupForm.password.value;
 	var confirmPassword = document.forms.signupForm.confirmPassword.value;
+	var birthday = document.form.signupForm.birthday.value;
 	
 	const minPasswordLength = 8;
 	
 	var emailPattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/; 
 	var screenNamePattern = /^\w+$/;
 	var passwordPattern = /^(\S*)?\d+(\S*)?$/;
+	var birthdayPattern = /^\d{1,2}\/\d{1,2}\/\d{4}$/;
 	
 	document.getElementById("emailMessage").innerHTML ="";
 	document.getElementById("screenNameMessage").innerHTML ="";
 	document.getElementById("passwordMessage").innerHTML ="";
 	document.getElementById("confirmPasswordMessage").innerHTML ="";
+	document.getElementById("birthdayMessage").innerHTML ="";
 		
 	if ( (screenName==null) || (screenName=="") || (!screenNamePattern.test(screenName)) ) {  
 	    document.getElementById("screenNameMessage").innerHTML="Please enter the correct username format (No spaces or other non-word characters)<br>";
@@ -66,6 +70,12 @@ function signupValidation(event){
 
 	if (confirmPassword != password) {
 		document.getElementById("confirmPasswordMessage").innerHTML= "The confirmed password should be the same as the password given above<br>";
+		result = false;
+	}
+	
+	if(!birthdayPattern.test(birthday))
+	{
+		document.getElementById("birthdayMessage").innerHTML ="Invalid date.";
 		result = false;
 	}
 			
