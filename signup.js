@@ -1,36 +1,3 @@
-function loginValidation(event){
-	const minimumPasswordLength = 8;
-	
-	var elements = event.currentTarget;
-	
-	var emailInput = elements[0].value;
-	var passwordInput = elements[1].value;
-	
-	var result = true;
-	
-	var emailPattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/; 
-	var passwordPattern = /^(\S*)?\d+(\S*)?$/;
-	
-	document.getElementById("emailMessageLogin").innerHTML ="";
-    document.getElementById("passwordMessageLogin").innerHTML ="";
-
-    
-    if ( (emailInput == "") || (emailInput == null) || (!emailPattern.test(emailInput)) ){
-    	document.getElementById("emailMessageLogin").innerHTML="Email is empty or invalid (example: rivero2r@uregina.ca)<br>";
-    	result = false;
-    }
-    
-    if ( (passwordInput == "") || (passwordInput == null) || (passwordInput.length < minimumPasswordLength) || (!passwordPattern.test(passwordInput)) ) {
-    	document.getElementById("passwordMessageLogin").innerHTML="Invalid password format (atleast 8 characters long, no spaces)<br>";
-        result = false;
-    }
-    
-    if(result == false)
-    {    
-        event.preventDefault();
-    }
-}
-
 function signupValidation(event){
 	var result = true;
 	
