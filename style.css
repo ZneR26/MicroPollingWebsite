@@ -195,6 +195,7 @@ section:after {
 
 #solo {
 	margin-left: 50px;
+	text-decoration: underline;
 }
 
 #button {
@@ -204,6 +205,14 @@ section:after {
 
 #block {
 	border-bottom: 3px solid lime;
+}
+
+#listOfRecentActivities {
+	margin-left: 50px;
+}
+
+#recentPolls {
+	text-decoration: underline;
 }
 
 /* END OF SPECIFIC CONTENT STYLING */

@@ -1,10 +1,24 @@
 <?php
+    // Shows errors instead of a blank white php page
+    ini_set('display_startup_errors', true);
+    error_reporting(E_ALL);
+    ini_set('display_errors', true);
+    
+    $db = new mysqli("localhost", "rivero2r", "rivero28", "rivero2r");
+    if ($db->connect_error)
+    {
+        die ("Connection failed: " . $db->connect_error);
+    }
+
     $validate = true;
     $reg_Email = "/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/";
     $reg_Pswd = "/^(\S*)?\d+(\S*)?$/";
     
     $email = "";
     $error = "";
+    
+    $selectRecentPolls = "SELECT * FROM poll WHERE createdDateTime IN (SELECT MAX(createdDateTime) FROM poll GROUP BY poll_ID) ORDER BY createdDateTime DESC LIMIT 5";
+    $recentPollsData = $db->query($selectRecentPolls);
     
     if (isset($_POST["submitted"]) && $_POST["submitted"])
     {
@@ -44,8 +58,9 @@
         if($validate == true)
         {
             session_start();
-            $_SESSION["email"] = $row["email"];
-            header("Location: pollmanagement.html");
+            $_SESSION["user_ID"] = $row["user_ID"];
+            $_SESSION["screenName"] = $row["screenName"];
+            header("Location: pollmanagement.php");
             $db->close();
             exit();
         }
@@ -63,6 +78,7 @@
 		<title></title>
 		<link rel="stylesheet" href="style.css" type="text/css">
 		<script type="text/javascript" src="login.js"> </script>
+		<script type="text/javascript" src="dynamicData.js"> </script>
 	</head>
 	
 	<body>
@@ -79,21 +95,69 @@
 		
 		<section>
 			<section class="content">
-				<h2> Recent Polls </h2>
+				<h2 id="recentPolls"> Recent Polls </h2>
 				
-				<h3> QUESTION </h3>
+				<div id="demo"> </div>
 				
-				<ul>
-					<li> Option 1</li>
-					<li> Option 2</li>
-					<li> Option 3</li>
-					<li> Option 4</li>
-					<li> Option 5</li>
-				</ul>
 				
-				<!-- SHOULD BE A BUTTON IN THE FUTURE -->
-				<a class="options" href = "pollresults.html"> Results </a> &nbsp;
-				<a class="options" href = "pollvote.html"> Vote </a>
+				<?php 
+				while ($row = $recentPollsData->fetch_assoc())
+                {
+                    $poll_ID = $row["poll_ID"];
+                    $user_ID = $row["user_ID"];
+                    $question = $row["question"];
+                    $openDate = $row["openDate"];
+                    $closeDate = $row["closeDate"];
+                    $openTime = $row["openTime"];
+                    $closeTime = $row["closeTime"];
+                    $createdDateTime = $row["createdDateTime"];
+                    $lastVoteDateTime = $row["lastVoteDateTime"];
+                    
+                    $associatedOptions = "SELECT answer_ID, voteCount, answer FROM answers WHERE poll_ID = '$poll_ID'";
+                    $executeOptionSelection = $db->query($associatedOptions);
+                    
+                    $associatedUser = "SELECT screenName FROM user WHERE user_ID = '$user_ID'";
+                    $executeUserSelection = $db->query($associatedUser);
+                    $grabUsername = $executeUserSelection->fetch_assoc();
+                    $screenName = $grabUsername["screenName"];
+                  
+                    
+//                     echo "$poll_ID &nbsp;";
+//                     echo "$user_ID &nbsp;";
+//                     echo "$question &nbsp;";
+//                     echo "$openDate &nbsp;";
+//                     echo "$closeDate &nbsp;";
+//                     echo "$openTime &nbsp;";
+//                     echo "$closeTime &nbsp;";
+//                     echo "$createdDateTime &nbsp;";
+//                     echo "$lastVoteDateTime &nbsp;";
+//                     echo "<br>";
+                ?>
+                
+                <p> 
+                    <?=$screenName?> created a poll @ <?=$createdDateTime?> 
+                    <h1><?=$question?></h1>
+                    <?php 
+                        while ($grabOption = $executeOptionSelection->fetch_assoc())
+                        {
+                            $answer = $grabOption["answer"];
+                            $voteCount = $grabOption["voteCount"];
+                            $answer_ID = $grabOption["answer_ID"];
+                    ?>
+                    <ul>
+                    	<li><?=$answer?> </li>
+                    </ul>
+                    <?php
+                        }
+                    ?>
+                    <a class="options" href = "pollresults.php?poll_ID=<?=$poll_ID?>">Results</a> &nbsp;
+                    <a class="options" href = "pollvote.php?poll_ID=<?=$poll_ID?>"> Vote </a>
+                </p>
+                <br>
+                
+                <?php
+                }
+                ?>
 			</section>
 			
 			<section class="content">

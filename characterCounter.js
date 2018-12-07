@@ -11,8 +11,6 @@ function characterCounter(event)
 	var wordCount = document.getElementById("wordCount");
 	
 	var characters = currentTextArea.value.split('');
-	//wordCount.innerText = characters.length;
-	
 	
 	if (textIdentifier == "Question")
 		{

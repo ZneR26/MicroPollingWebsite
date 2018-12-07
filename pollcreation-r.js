@@ -1,4 +1,4 @@
-//document.getElementById("createPoll").addEventListener("submit", validatePoll, false);
+document.getElementById("pollCreationForm").addEventListener("submit", validatePoll, false);
 document.getElementById("createQuestion").addEventListener("keyup", characterCounter);
 document.getElementById("createOption1").addEventListener("keyup", characterCounter);
 document.getElementById("createOption2").addEventListener("keyup", characterCounter);

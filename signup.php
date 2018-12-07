@@ -1,94 +1,93 @@
 <?php
-$validate = true;
-$error = "";
-$reg_screenName = "/^\w+$/";
-$reg_Email = "/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/";
-$reg_Pswd = "/^(\S*)?\d+(\S*)?$/";
-$reg_Bday = "/^\d{1,2}\/\d{1,2}\/\d{4}$/";
-$email = "";
-$date = "mm/dd/yyyy";
-
-
-if (isset($_POST["submitted"]) && $_POST["submitted"])
-{
-    $screenName = trim($_POST["screenName"]);
-    $email = trim($_POST["email"]);
-    $password = trim($_POST["password"]);
-    $date = trim($_POST["birthday"]);
+    $validate = true;
+    $error = "";
+    $reg_screenName = "/^\w+$/";
+    $reg_Email = "/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/";
+    $reg_Pswd = "/^(\S*)?\d+(\S*)?$/";
+    $reg_Bday = "/^\d{1,2}\/\d{1,2}\/\d{4}$/";
+    $email = "";
+    $date = "mm/dd/yyyy";
     
-    $db = new mysqli("localhost", "rivero2r", "rivero28", "rivero2r");
-    if ($db->connect_error)
+    if (isset($_POST["submitted"]) && $_POST["submitted"])
     {
-        die ("Connection failed: " . $db->connect_error);
-    }
-    
-    $q1 = "SELECT * FROM user WHERE email = '$email'";
-    $r1 = $db->query($q1);
-    
-    $q2 = "SELECT * FROM user WHERE screenName = '$screenName'";
-    $r2 = $db->query($q2);
-    
-    if($r1->num_rows > 0)
-    {
-        $error = "The email address you've entered is already taken.";
-        $validate = false;
-    }
-    else if ($r2->num_rows > 0)
-    {
-        $error = "The screen name you've entered is already taken.";
-        $validate = false;
-    }
-    else
-    {
-        $screenNameMatch = preg_match($reg_screenName, $screenName);
-        if($screenName == null || $screenName == "" || $screenNameMatch == false)
+        $screenName = trim($_POST["screenName"]);
+        $email = trim($_POST["email"]);
+        $password = trim($_POST["password"]);
+        $date = trim($_POST["birthday"]);
+        
+        $db = new mysqli("localhost", "rivero2r", "rivero28", "rivero2r");
+        if ($db->connect_error)
         {
-            $validate = false;
+            die ("Connection failed: " . $db->connect_error);
         }
         
-        $emailMatch = preg_match($reg_Email, $email);
-        if($email == null || $email == "" || $emailMatch == false)
+        $q1 = "SELECT * FROM user WHERE email = '$email'";
+        $r1 = $db->query($q1);
+        
+        $q2 = "SELECT * FROM user WHERE screenName = '$screenName'";
+        $r2 = $db->query($q2);
+        
+        if($r1->num_rows > 0)
         {
+            $error = "The email address you've entered is already taken.";
             $validate = false;
         }
-        
-        
-        $pswdLen = strlen($password);
-        $pswdMatch = preg_match($reg_Pswd, $password);
-        if($password == null || $password == "" || $pswdLen< 8 || $pswdMatch == false)
+        else if ($r2->num_rows > 0)
         {
+            $error = "The screen name you've entered is already taken.";
             $validate = false;
         }
-        
-        $birthdayMatch = preg_match($reg_Bday, $date);
-        if($date == null || $date == "" || $birthdayMatch == false)
+        else
         {
-            $validate = false;
+            $screenNameMatch = preg_match($reg_screenName, $screenName);
+            if($screenName == null || $screenName == "" || $screenNameMatch == false)
+            {
+                $validate = false;
+            }
+            
+            $emailMatch = preg_match($reg_Email, $email);
+            if($email == null || $email == "" || $emailMatch == false)
+            {
+                $validate = false;
+            }
+            
+            
+            $pswdLen = strlen($password);
+            $pswdMatch = preg_match($reg_Pswd, $password);
+            if($password == null || $password == "" || $pswdLen< 8 || $pswdMatch == false)
+            {
+                $validate = false;
+            }
+            
+            $birthdayMatch = preg_match($reg_Bday, $date);
+            if($date == null || $date == "" || $birthdayMatch == false)
+            {
+                $validate = false;
+            }
+            
+            $error = "";
         }
         
-        $error = "";
-    }
-    
-    if($validate == true)
-    {
-        $dateFormat = date("Y-m-d", strtotime($date));
-        
-        $q3 = "INSERT INTO user (screenName, email, password, dateOfBirth) VALUES ('$screenName', '$email', '$password', '$dateFormat')";
-        
-        $r3 = $db->query($q3);
-        
-        if ($r3 === true)
+        if($validate == true)
         {
-            header("Location: main.php");
+            $dateFormat = date("Y-m-d", strtotime($date));
+            
+            $q3 = "INSERT INTO user (screenName, email, password, dateOfBirth) VALUES ('$screenName', '$email', '$password', '$dateFormat')";
+            
+            $r3 = $db->query($q3);
+            
+            if ($r3 === true)
+            {
+                header("Location: main.php");
+                $db->close();
+                exit();
+            }
+        }
+        else
+        {
             $db->close();
-            exit();
         }
     }
-    else
-    {
-        $db->close();
-    }
-}
 ?>
 
 <!DOCTYPE html> 
@@ -132,6 +131,7 @@ if (isset($_POST["submitted"]) && $_POST["submitted"])
 				<h1> Create a New Account </h1>
 			
 				<p class="errorMessage"><?=$error?></p>
+				
 				<form id="signupForm" method="post" action="signup.php">
 				<input type="hidden" name="submitted" value="1"/>
 					<label id="screenNameMessage" class="errorMessage"></label>
