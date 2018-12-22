@@ -97,67 +97,69 @@
 			<section class="content">
 				<h2 id="recentPolls"> Recent Polls </h2>
 				
-				<div id="demo"> </div>
+				<div id="test"></div>
+				<div id="refreshPolls"></div>
 				
-				
-				<?php 
-				while ($row = $recentPollsData->fetch_assoc())
-                {
-                    $poll_ID = $row["poll_ID"];
-                    $user_ID = $row["user_ID"];
-                    $question = $row["question"];
-                    $openDate = $row["openDate"];
-                    $closeDate = $row["closeDate"];
-                    $openTime = $row["openTime"];
-                    $closeTime = $row["closeTime"];
-                    $createdDateTime = $row["createdDateTime"];
-                    $lastVoteDateTime = $row["lastVoteDateTime"];
-                    
-                    $associatedOptions = "SELECT answer_ID, voteCount, answer FROM answers WHERE poll_ID = '$poll_ID'";
-                    $executeOptionSelection = $db->query($associatedOptions);
-                    
-                    $associatedUser = "SELECT screenName FROM user WHERE user_ID = '$user_ID'";
-                    $executeUserSelection = $db->query($associatedUser);
-                    $grabUsername = $executeUserSelection->fetch_assoc();
-                    $screenName = $grabUsername["screenName"];
-                  
-                    
-//                     echo "$poll_ID &nbsp;";
-//                     echo "$user_ID &nbsp;";
-//                     echo "$question &nbsp;";
-//                     echo "$openDate &nbsp;";
-//                     echo "$closeDate &nbsp;";
-//                     echo "$openTime &nbsp;";
-//                     echo "$closeTime &nbsp;";
-//                     echo "$createdDateTime &nbsp;";
-//                     echo "$lastVoteDateTime &nbsp;";
-//                     echo "<br>";
-                ?>
-                
-                <p> 
-                    <?=$screenName?> created a poll @ <?=$createdDateTime?> 
-                    <h1><?=$question?></h1>
-                    <?php 
-                        while ($grabOption = $executeOptionSelection->fetch_assoc())
-                        {
-                            $answer = $grabOption["answer"];
-                            $voteCount = $grabOption["voteCount"];
-                            $answer_ID = $grabOption["answer_ID"];
+				<div id="initialDisplay">
+    				<?php 
+    				while ($row = $recentPollsData->fetch_assoc())
+                    {
+                        $poll_ID = $row["poll_ID"];
+                        $user_ID = $row["user_ID"];
+                        $question = $row["question"];
+                        $openDate = $row["openDate"];
+                        $closeDate = $row["closeDate"];
+                        $openTime = $row["openTime"];
+                        $closeTime = $row["closeTime"];
+                        $createdDateTime = $row["createdDateTime"];
+                        $lastVoteDateTime = $row["lastVoteDateTime"];
+                        
+                        $associatedOptions = "SELECT answer_ID, voteCount, answer FROM answers WHERE poll_ID = '$poll_ID'";
+                        $executeOptionSelection = $db->query($associatedOptions);
+                        
+                        $associatedUser = "SELECT screenName FROM user WHERE user_ID = '$user_ID'";
+                        $executeUserSelection = $db->query($associatedUser);
+                        $grabUsername = $executeUserSelection->fetch_assoc();
+                        $screenName = $grabUsername["screenName"];
+                      
+                        
+    //                     echo "$poll_ID &nbsp;";
+    //                     echo "$user_ID &nbsp;";
+    //                     echo "$question &nbsp;";
+    //                     echo "$openDate &nbsp;";
+    //                     echo "$closeDate &nbsp;";
+    //                     echo "$openTime &nbsp;";
+    //                     echo "$closeTime &nbsp;";
+    //                     echo "$createdDateTime &nbsp;";
+    //                     echo "$lastVoteDateTime &nbsp;";
+    //                     echo "<br>";
                     ?>
-                    <ul>
-                    	<li><?=$answer?> </li>
-                    </ul>
+                    
+                    <p> 
+                        <?=$screenName?> created a poll @ <?=$createdDateTime?> 
+                        <h1><?=$question?></h1>
+                        <?php 
+                            while ($grabOption = $executeOptionSelection->fetch_assoc())
+                            {
+                                $answer = $grabOption["answer"];
+                                $voteCount = $grabOption["voteCount"];
+                                $answer_ID = $grabOption["answer_ID"];
+                        ?>
+                        <ul>
+                        	<li><?=$answer?> </li>
+                        </ul>
+                        <?php
+                            }
+                        ?>
+                        <a class="options" href = "pollresults.php?poll_ID=<?=$poll_ID?>">Results</a> &nbsp;
+                        <a class="options" href = "pollvote.php?poll_ID=<?=$poll_ID?>"> Vote </a>
+                    </p>
+                    <br>
+                    
                     <?php
-                        }
+                    }
                     ?>
-                    <a class="options" href = "pollresults.php?poll_ID=<?=$poll_ID?>">Results</a> &nbsp;
-                    <a class="options" href = "pollvote.php?poll_ID=<?=$poll_ID?>"> Vote </a>
-                </p>
-                <br>
-                
-                <?php
-                }
-                ?>
+                </div>
 			</section>
 			
 			<section class="content">
